@@ -1,0 +1,23 @@
+j-rpc:
+  server:
+    name: poetry
+    version: 1.0
+    port: 5005
+    register: false
+j-jdbc:
+  tableInit: 3
+db:
+  host: 127.0.0.1
+  port: 3306
+  schema: POETRY
+  username: root
+  password: abcd1234
+server:
+  port: 7999
+spring:
+  application:
+    name: ${j-rpc.server.name}
+  datasource:
+    url: jdbc:mysql://${db.host}:${db.port}/${db.schema}?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: ${db.username}
+    password: ${db.password}
