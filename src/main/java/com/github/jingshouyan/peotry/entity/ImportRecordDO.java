@@ -6,7 +6,6 @@ import com.github.jingshouyan.jdbc.comm.annotaion.Table;
 import com.github.jingshouyan.jdbc.comm.entity.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.stereotype.Component;
 
 /**
  * @author jingshouyan

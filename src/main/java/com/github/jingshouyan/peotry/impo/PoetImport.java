@@ -8,7 +8,6 @@ import com.github.jingshouyan.peotry.dao.PoetryDao;
 import com.github.jingshouyan.peotry.dto.PoetDTO;
 import com.github.jingshouyan.peotry.entity.AuthorDO;
 import com.github.jingshouyan.peotry.entity.PoetryDO;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

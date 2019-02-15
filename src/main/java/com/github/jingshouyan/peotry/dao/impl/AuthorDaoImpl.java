@@ -5,8 +5,6 @@ import com.github.jingshouyan.peotry.dao.AuthorDao;
 import com.github.jingshouyan.peotry.entity.AuthorDO;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * @author jingshouyan
  * #date 2019/2/15 18:53

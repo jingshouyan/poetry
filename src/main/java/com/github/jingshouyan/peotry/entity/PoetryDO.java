@@ -1,6 +1,9 @@
 package com.github.jingshouyan.peotry.entity;
 
-import com.github.jingshouyan.jdbc.comm.annotaion.*;
+import com.github.jingshouyan.jdbc.comm.annotaion.Column;
+import com.github.jingshouyan.jdbc.comm.annotaion.Index;
+import com.github.jingshouyan.jdbc.comm.annotaion.Key;
+import com.github.jingshouyan.jdbc.comm.annotaion.Table;
 import com.github.jingshouyan.jdbc.comm.entity.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
