@@ -5,6 +5,7 @@ import com.github.jingshouyan.jdbc.comm.annotaion.Key;
 import com.github.jingshouyan.jdbc.comm.annotaion.Table;
 import com.github.jingshouyan.jdbc.comm.entity.BaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author jingshouyan
@@ -12,6 +13,7 @@ import lombok.Data;
  */
 @Table("T_AUTHOR")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class AuthorDO extends BaseDO {
 
     @Key

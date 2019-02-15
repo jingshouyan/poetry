@@ -3,6 +3,7 @@ package com.github.jingshouyan.peotry.entity;
 import com.github.jingshouyan.jdbc.comm.annotaion.*;
 import com.github.jingshouyan.jdbc.comm.entity.BaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author jingshouyan
@@ -11,6 +12,7 @@ import lombok.Data;
 @Table("T_POETRY")
 @Index("authorId")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class PoetryDO extends BaseDO {
     @Key
     private Long Id;
