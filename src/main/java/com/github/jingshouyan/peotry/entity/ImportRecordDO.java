@@ -6,23 +6,16 @@ import com.github.jingshouyan.jdbc.comm.annotaion.Table;
 import com.github.jingshouyan.jdbc.comm.entity.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.stereotype.Component;
 
 /**
  * @author jingshouyan
- * #date 2019/2/15 18:27
+ * #date 2019/2/15 19:35
  */
-@Table("T_AUTHOR")
+@Table("T_IMPORT_RECORD")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class AuthorDO extends BaseDO {
-
-    @Key
-    private Long id;
-    @Column(length = 20,index = true)
-    private String name;
-    @Column(length = 10)
-    private String dynasty;
-    @Column(length = 1000)
-    private String desc;
-
+public class ImportRecordDO extends BaseDO {
+    @Key@Column(length = 100)
+    private String fileName;
 }
