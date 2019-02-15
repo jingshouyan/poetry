@@ -25,6 +25,8 @@ public class PoetryDO extends BaseDO {
     private String author;
     @Column(length = 10)
     private String dynasty;
+    @Column(length = 10)
+    private String type;
     @Column(length = 100)
     private String title;
     @Column(length = 4000)

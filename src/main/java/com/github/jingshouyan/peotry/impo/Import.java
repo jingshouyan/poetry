@@ -7,5 +7,5 @@ package com.github.jingshouyan.peotry.impo;
 @FunctionalInterface
 public interface Import {
 
-    void action(String dynasty,String json);
+    void action(String filename,String json);
 }

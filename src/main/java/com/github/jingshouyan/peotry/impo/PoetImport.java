@@ -25,7 +25,10 @@ public class PoetImport implements Import{
     @Autowired
     private PoetryDao poetryDao;
     @Override
-    public void action(String dynasty, String json) {
+    public void action(String filename, String json) {
+        String[] ss = filename.split("\\.");
+        String type = ss[0];
+        String dynasty = ss[1];
         List<PoetDTO> poets = JsonUtil.toList(json, PoetDTO.class);
         List<String> authors = poets.stream()
                 .map(PoetDTO::getAuthor)
@@ -37,6 +40,7 @@ public class PoetImport implements Import{
                     poetry.setAuthorId(map.get(poet.getAuthor()));
                     poetry.setAuthor(poet.getAuthor());
                     poetry.setDynasty(dynasty);
+                    poetry.setType(type);
                     poetry.setTitle(poet.getTitle());
                     String content = poet.getParagraphs().stream().collect(Collectors.joining());
                     content.replace("，"," ， ");

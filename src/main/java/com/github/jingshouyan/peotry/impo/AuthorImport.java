@@ -20,7 +20,9 @@ public class AuthorImport implements Import {
 
 
     @Override
-    public void action(String dynasty, String json) {
+    public void action(String filename, String json) {
+        String[] ss = filename.split("\\.");
+        String dynasty = ss[1];
         List<AuthorDO> authors = JsonUtil.toList(json,AuthorDO.class);
         authors.forEach(authorDO -> authorDO.setName(dynasty));
         authorDao.batchInsert(authors);
