@@ -45,6 +45,7 @@ public class PoetImport implements Import{
                     poetry.setContent(content);
                     return poetry;
                 }).collect(Collectors.toList());
+        poetryDao.batchInsert(poetries);
     }
 
 
