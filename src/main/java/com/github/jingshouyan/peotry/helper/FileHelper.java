@@ -1,5 +1,6 @@
 package com.github.jingshouyan.peotry.helper;
 
+import com.hankcs.hanlp.HanLP;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,9 @@ public class FileHelper {
     }
     @SneakyThrows
     public String readData(File file) {
-        return FileUtils.readFileToString(file,"UTF-8");
+        String data = FileUtils.readFileToString(file,"UTF-8");
+        data = HanLP.convertToSimplifiedChinese(data);
+        return data;
     }
 
     @SneakyThrows

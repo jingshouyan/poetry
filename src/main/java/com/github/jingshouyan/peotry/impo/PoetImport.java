@@ -3,11 +3,13 @@ package com.github.jingshouyan.peotry.impo;
 import com.github.jingshouyan.jdbc.comm.bean.Condition;
 import com.github.jingshouyan.jdbc.comm.util.ConditionUtil;
 import com.github.jingshouyan.jrpc.base.util.json.JsonUtil;
+import com.github.jingshouyan.peotry.constant.PoetryConstant;
 import com.github.jingshouyan.peotry.dao.AuthorDao;
 import com.github.jingshouyan.peotry.dao.PoetryDao;
 import com.github.jingshouyan.peotry.dto.PoetDTO;
 import com.github.jingshouyan.peotry.entity.AuthorDO;
 import com.github.jingshouyan.peotry.entity.PoetryDO;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,9 +25,11 @@ import java.util.stream.Collectors;
  * #date 2019/2/15 21:04
  */
 @Component
-public class PoetImport implements Import{
+public class PoetImport implements Import, PoetryConstant {
     @Autowired
     private PoetryDao poetryDao;
+    @Autowired
+    private AuthorDao authorDao;
     @Override
     public void action(String filename, String json) {
         String[] ss = filename.split("\\.");
@@ -35,7 +39,7 @@ public class PoetImport implements Import{
         Set<String> authors = poets.stream()
                 .map(PoetDTO::getAuthor)
                 .collect(Collectors.toSet());
-        Map<String,Long> map = authorMap(authors, dynasty);
+        Map<String,Long> map = authorDao.authorMap(authors, dynasty);
         List<PoetryDO> poetries = poets.stream()
                 .map(poet -> {
                     PoetryDO poetry = new PoetryDO();
@@ -51,22 +55,8 @@ public class PoetImport implements Import{
                     poetry.setContent(content);
                     return poetry;
                 }).collect(Collectors.toList());
-        poetryDao.batchInsert(poetries);
+        List<List<PoetryDO>> sub = Lists.partition(poetries,BATCH_SIZE);
+        sub.parallelStream().forEach(poetryDao::batchInsert);
     }
 
-
-    @Autowired
-    private AuthorDao authorDao;
-    private Map<String,Long> authorMap(Collection<String> authorNames, String dynasty) {
-        List<Condition> conditions = ConditionUtil.newInstance()
-                .field("name").in(authorNames)
-                .field("dynasty").eq(dynasty)
-                .conditions();
-        List<AuthorDO> authors = authorDao.query(conditions);
-        Map<String,Long> map = Maps.newHashMap();
-        for(AuthorDO author: authors) {
-            map.put(author.getName(),author.getId());
-        }
-        return map;
-    }
 }

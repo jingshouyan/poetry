@@ -22,6 +22,6 @@ public class ImportTest {
     private ImportHelpler importHelpler;
     @Test
     public void importShi() {
-        importHelpler.importData("D:\\work-python\\chinese-poetry\\json");
+        importHelpler.importData("D:\\workspace-python\\chinese-poetry\\json");
     }
 }
