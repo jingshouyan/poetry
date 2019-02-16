@@ -1,6 +1,7 @@
 package com.github.jingshouyan.peotry.helper;
 
 import com.github.jingshouyan.peotry.dao.ImportRecordDao;
+import com.github.jingshouyan.peotry.entity.ImportRecordDO;
 import com.github.jingshouyan.peotry.impo.Import;
 import com.github.jingshouyan.peotry.impo.factory.ImportFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +36,12 @@ public class ImportHelpler {
                 if(imp != null) {
                     String data = fileHelper.readData(file);
                     imp.action(filename,data);
+                } else {
+                    log.error("import 实例不存在");
                 }
+                ImportRecordDO record = new ImportRecordDO();
+                record.setFileName(filename);
+                importRecordDao.insert(record);
             } else {
                 log.info(" file exits: {}",filename);
             }

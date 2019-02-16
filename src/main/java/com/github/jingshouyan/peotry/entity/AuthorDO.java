@@ -1,5 +1,6 @@
 package com.github.jingshouyan.peotry.entity;
 
+import com.github.jingshouyan.jdbc.comm.Constant;
 import com.github.jingshouyan.jdbc.comm.annotaion.Column;
 import com.github.jingshouyan.jdbc.comm.annotaion.Key;
 import com.github.jingshouyan.jdbc.comm.annotaion.Table;
@@ -18,11 +19,11 @@ public class AuthorDO extends BaseDO {
 
     @Key
     private Long id;
-    @Column(length = 20,index = true)
+    @Column(length = 100,index = true)
     private String name;
-    @Column(length = 10)
+    @Column(length = 50)
     private String dynasty;
-    @Column(length = 1000)
+    @Column(length = Constant.VARCHAR_MAX_LENGTH)
     private String desc;
 
 }

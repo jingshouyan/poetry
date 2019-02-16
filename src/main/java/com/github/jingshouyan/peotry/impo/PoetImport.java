@@ -12,8 +12,10 @@ import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -30,9 +32,9 @@ public class PoetImport implements Import{
         String type = ss[0];
         String dynasty = ss[1];
         List<PoetDTO> poets = JsonUtil.toList(json, PoetDTO.class);
-        List<String> authors = poets.stream()
+        Set<String> authors = poets.stream()
                 .map(PoetDTO::getAuthor)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         Map<String,Long> map = authorMap(authors, dynasty);
         List<PoetryDO> poetries = poets.stream()
                 .map(poet -> {
@@ -43,8 +45,8 @@ public class PoetImport implements Import{
                     poetry.setType(type);
                     poetry.setTitle(poet.getTitle());
                     String content = poet.getParagraphs().stream().collect(Collectors.joining());
-                    content.replace("，"," ， ");
-                    content.replace("。"," 。 ");
+                    content = content.replace("，"," ， ");
+                    content = content.replace("。"," 。 ");
                     content = " " +content;
                     poetry.setContent(content);
                     return poetry;
@@ -55,9 +57,9 @@ public class PoetImport implements Import{
 
     @Autowired
     private AuthorDao authorDao;
-    private Map<String,Long> authorMap(List<String> authorNames, String dynasty) {
+    private Map<String,Long> authorMap(Collection<String> authorNames, String dynasty) {
         List<Condition> conditions = ConditionUtil.newInstance()
-                .field("author").in(authorNames)
+                .field("name").in(authorNames)
                 .field("dynasty").eq(dynasty)
                 .conditions();
         List<AuthorDO> authors = authorDao.query(conditions);

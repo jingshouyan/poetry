@@ -24,7 +24,7 @@ public class AuthorImport implements Import {
         String[] ss = filename.split("\\.");
         String dynasty = ss[1];
         List<AuthorDO> authors = JsonUtil.toList(json,AuthorDO.class);
-        authors.forEach(authorDO -> authorDO.setName(dynasty));
+        authors.forEach(authorDO -> authorDO.setDynasty(dynasty));
         authorDao.batchInsert(authors);
     }
 }
