@@ -28,6 +28,10 @@
         </dependency>
         <dependency>
             <groupId>com.github.jingshouyan</groupId>
+            <artifactId>crud-dql-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.jingshouyan</groupId>
             <artifactId>j-jdbc-starter</artifactId>
         </dependency>
         <dependency>
