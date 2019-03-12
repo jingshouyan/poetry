@@ -13,8 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author jingshouyan
  * #date 2019/2/15 22:33
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = PoetryApp.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@SpringBootTest(classes = PoetryApp.class)
 @Slf4j
 public class ImportTest {
 
@@ -22,6 +22,6 @@ public class ImportTest {
     private ImportHelpler importHelpler;
     @Test
     public void importShi() {
-        importHelpler.importData("D:\\workspace-python\\chinese-poetry\\json");
+//        importHelpler.importData("D:\\workspace-python\\chinese-poetry\\json");
     }
 }
